@@ -22,7 +22,8 @@ urlpatterns = [
     path('', root),
     path('admin/', admin.site.urls),
     path('blog/', include('blog.urls')), # все пути, начинающие с 'blog' смотри в файле 'blog.urls'
-]
+       ]
+
 
 """
 127.0.0.1:8000/     = my_site.com/  в глобальный маршрутизатор попадает --> ''

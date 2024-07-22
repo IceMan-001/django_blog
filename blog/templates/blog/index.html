@@ -1,6 +1,11 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-<a href="{% url 'blog:post_list'%}">Посты</a>
+
+<a href="{% url 'blog:post_list'%}"><h3>Все посты</h3></a>
+<a href="{% url 'blog:post_list_in_table'%}"><h3>Посты в виде таблицы</h3></a>
+<a href="{% url 'blog:add_post'%}"><h3>Создать новый пост</h3></a>
+<a href="{% url 'blog:about'%}"><h3>О сайте</h3></a>
+<a href="{% url 'blog:contacts'%}"><h3>Контакты</h3></a>
 
 {% endblock content %}

@@ -1,0 +1,42 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<div style="text-align: center;">
+<table style="margin: 0 auto" border="2" cellspacing="1" cellpadding="15" width="80%" height="130" >
+        <caption><h2>Список постов</h2></caption>
+    <colgroup>
+        <col span="4" style="background:Khaki"><!-- С помощью этой конструкции задаем цвет фона для первых двух столбцов таблицы-->
+        <col style="background-color:LightCyan"><!-- Задаем цвет фона для следующего (одного) столбца таблицы-->
+    </colgroup >
+  <thead>
+    <tr>
+        <th><h2>Автор</h2></th>
+        <th><h2>Заголовок</h2></th>
+        <th><h2>Текст поста</h2></th>
+        <th><h2>Дата поста</h2></th>
+    </tr>
+  </thead>
+  <tbody>
+{% for post in posts %}
+    <tr>
+        <th>
+            <h3>{{post.author}}</h3>
+        </th>
+        <th>
+            <h3>{{post.title}}</h3>
+        </th>
+        <th>
+            <h3>{{post.text}}</h3>
+        </th>
+        <th>
+            <h3>{{post.created_at}}</h3>
+        </th>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+
+{% endblock content %}
+
+

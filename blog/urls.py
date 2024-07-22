@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import index, about, send_data, add_post, post_list
+from .views import index, about, send_data, add_post, post_list, post_list_in_table, contacts
 
 app_name = 'blog'
 urlpatterns = [
@@ -8,5 +8,6 @@ urlpatterns = [
     path('data', send_data, name='send_data'),
     path('post/add/', add_post, name='add_post'),
     path('post/', post_list, name='post_list'),
-
+    path('post/table/', post_list_in_table, name='post_list_in_table'),
+    path('post/contacts/', contacts, name='contacts'),
 ]

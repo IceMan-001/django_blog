@@ -23,6 +23,15 @@ def about(request):
     return render(request, template_name='blog/about.html', context=context)
 
 
+def contacts(request):
+    context = {
+        'name': 'Тестовый сайт на Django',
+        'email': 'd.test@yandex.ru',
+        'title': 'Здесь будут контакты'
+    }
+    return render(request, template_name='blog/contacts.html', context=context)
+
+
 def send_data(request):
     data = {'name': 'Elena', 'age': 36}
     return JsonResponse(data=data)
@@ -57,3 +66,13 @@ def post_list(request):
         'posts': posts
     }
     return render(request, template_name='blog/posts.html', context=context)
+
+
+def post_list_in_table(request):  # Посты в виде таблицы
+    # Получаем все объекты модели Post
+    posts = Post.objects.all()
+    context = {
+        'title': 'Посты',
+        'posts': posts
+    }
+    return render(request, template_name='blog/posts_in_table.html', context=context)
