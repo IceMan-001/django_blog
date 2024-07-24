@@ -1,8 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 
 from .forms import PostForm
 from .models import Post
+
+"""
+Представление на функциях и классах
+FBV - Function base views
+CBV - Class bases views
+"""
 
 
 def root(request):
@@ -76,3 +82,38 @@ def post_list_in_table(request):  # Посты в виде таблицы
         'posts': posts
     }
     return render(request, template_name='blog/posts_in_table.html', context=context)
+
+
+def post_detail(request, pk):
+    # получаем объект с заданным первичным ключом
+    post = get_object_or_404(Post, pk=pk)
+    # post = Post.objects.get(pk=pk)
+    context = {
+        'title': 'Информация о посте',
+        'post': post
+    }
+
+    return render(request, template_name='blog/post_detail.html', context=context)
+
+
+def post_edit(request, pk):
+    post = get_object_or_404(Post, pk=pk)  # получить объект по ключу
+    if request.method == 'POST':
+        form = PostForm(data=request.POST, instance=post)
+        if form.is_valid():
+            form.save()
+            return post_list(request)
+
+    else:
+        form = PostForm(instance=post)
+    context = {
+        'forma': form,
+        'title': 'Редактировать пост'
+    }
+    return render(request, template_name='blog/post_edit.html', context=context)
+
+
+def post_delete(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    pass
+
