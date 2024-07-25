@@ -1,13 +1,57 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
+<style>
+  table {
+font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+font-size: 14px;
+border-radius: 10px;
+border-spacing: 0;
+text-align: center;
+margin: 0 auto
+}
+th {
+background: #BCEBDD;
+color: white;
+text-shadow: 0 1px 1px #2D2020;
+padding: 10px 20px;
+}
+th, td {
+border-style: solid;
+border-width: 0 1px 1px 0;
+border-color: white;
+}
+th:first-child, td:first-child {
+text-align: left;
+}
+th:first-child {
+border-top-left-radius: 10px;
+}
+th:last-child {
+border-top-right-radius: 10px;
+border-right: none;
+}
+td {
+padding: 10px 20px;
+background: #F8E391;
+}
+tr:last-child td:first-child {
+border-radius: 0 0 0 10px;
+}
+tr:last-child td:last-child {
+border-radius: 0 0 10px 0;
+}
+tr td:last-child {
+border-right: none;
+}
+</style>
+
 <div style="text-align: center;">
-<table style="margin: 0 auto" border="2" cellspacing="1" cellpadding="15" width="80%" height="130" >
-        <caption><h2>Список постов</h2></caption>
+<h2>Список постов</h2>
+    <table>
+ <caption>Это таблица с постами</caption>
     <colgroup>
-        <col span="4" style="background:Khaki"><!-- С помощью этой конструкции задаем цвет фона для первых двух столбцов таблицы-->
-        <col style="background-color:LightCyan"><!-- Задаем цвет фона для следующего (одного) столбца таблицы-->
-    </colgroup >
+    </colgroup>
   <thead>
     <tr>
         <th><h2>Автор</h2></th>
@@ -19,24 +63,26 @@
   <tbody>
 {% for post in posts %}
     <tr>
-        <th>
+        <td>
             <h3>{{post.author}}</h3>
-        </th>
-        <th>
+        </td>
+        <td>
             <h3>{{post.title}}</h3>
-        </th>
-        <th>
+        </td>
+        <td>
             <h3>{{post.text}}</h3>
-        </th>
-        <th>
+        </td>
+        <td>
             <h3>{{post.created_at}}</h3>
-        </th>
+        </td>
     </tr>
   {% endfor %}
   </tbody>
 </table>
 </div>
+<hr>
 <a href="{% url 'blog:index'%}"><h3>На главную страницу</h3></a>
+
 {% endblock content %}
 
 
