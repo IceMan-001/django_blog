@@ -107,13 +107,13 @@ def post_edit(request, pk):
     else:
         form = PostForm(instance=post)
     context = {
-        'forma': form,
+        'form': form,
         'title': 'Редактировать пост'
     }
     return render(request, template_name='blog/post_edit.html', context=context)
 
 
 def post_delete(request, pk):
-    post = get_object_or_404(Post, pk=pk)
+    # post = get_object_or_404(Post, pk=pk)
     pass
 
