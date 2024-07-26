@@ -12,7 +12,7 @@ from .models import Post
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['author', 'title', 'text']  # так правильнее всего
+        fields = ['author', 'title', 'text', 'image']  # так правильнее всего
         # второй способ не надо так делать
         # fields = '__all__'
         # exclude = ['created_at'] или так

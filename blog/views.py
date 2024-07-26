@@ -53,15 +53,19 @@ def add_post(request):
         return render(request, template_name='blog/add_post.html', context=context)
 
     if request.method == 'POST':
-        form = PostForm(data=request.POST)
+        form = PostForm(request.POST, request.FILES)
         if form.is_valid():
-            post = Post()
-            post.author = form.cleaned_data['author']
-            post.title = form.cleaned_data['title']
-            post.text = form.cleaned_data['text']
-            post.save()
+            # instance = form.save(commit=False)  # объект модели (можно изменить перед записью в таблицу)
+            # instance.title = 'Миша'
+            # post = Post()
+            # post.author = form.cleaned_data['author']
+            # post.title = form.cleaned_data['title']
+            # post.text = form.cleaned_data['text']
+            # post.image = form.cleaned_data['image']
+            # post.save()
+            form.save(commit=True)
 
-            return index(request)
+        return index(request)
 
 
 def post_list(request):
@@ -116,4 +120,3 @@ def post_edit(request, pk):
 def post_delete(request, pk):
     # post = get_object_or_404(Post, pk=pk)
     pass
-

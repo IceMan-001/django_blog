@@ -58,6 +58,7 @@ border-right: none;
         <th><h2>Заголовок</h2></th>
         <th><h2>Текст поста</h2></th>
         <th><h2>Дата поста</h2></th>
+        <th><h2>Картинка</h2></th>
     </tr>
   </thead>
   <tbody>
@@ -74,6 +75,9 @@ border-right: none;
         </td>
         <td>
             <h3>{{post.created_at}}</h3>
+        </td>
+         <td>
+            <h3>{{post.image}}</h3>
         </td>
     </tr>
   {% endfor %}
