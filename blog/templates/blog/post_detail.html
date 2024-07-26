@@ -1,13 +1,13 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-<h2>Информация о посте № {{posts.id}}</h2>
-<p>Автор - {{posts.author}}</p>
-<p>Название - {{posts.title}}</p>
+<h2>Информация о посте № {{post.id}}</h2>
+<p>Автор - {{post.author}}</p>
+<p>Название - {{post.title}}</p>
 <p>Текст поста:</p>
 <p>{{posts.text}}</p>
 <br>
-<p>Создан: {{posts.created_at}}</p>
+<p>Создан: {{post.created_at}}</p>
 <div>
     <a href="{% url 'blog:post_edit' pk=post.id%}" class="btn btn-primary">Редактировать</a>
     <form action="{url 'blog:post_delete' pk=post.id%}" method="post" style="display:inline">
@@ -16,6 +16,6 @@
     </form>
 </div>
 
-
+<hr>
 <a href="{% url 'blog:index'%}"><h3>На главную страницу</h3></a>
 {% endblock content %}
