@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, JsonResponse
 
 from .forms import PostForm
@@ -118,5 +118,17 @@ def post_edit(request, pk):
 
 
 def post_delete(request, pk):
-    # post = get_object_or_404(Post, pk=pk)
-    pass
+    post = get_object_or_404(Post, pk=pk)  # получить объект по ключу
+    if request.method == 'POST':
+        post.delete()
+        # messages.success(request, 'The post has been deleted successfully.')
+        return redirect('blog:post_list')
+    return render(request, template_name="blog/post_delete.html", context={'post': post})
+
+
+def page_not_found(request, exception):
+    return render(request, 'blog/404.html', status=404)
+
+
+def server_error(request):
+    return render(request, 'blog/500.html', status=500)
