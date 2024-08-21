@@ -14,11 +14,9 @@
 
 <br>
 <p>Создан: {{post.created_at}}</p>
-
-    <a href="{% url 'blog:post_edit' pk=post.id%}" class="btn btn-primary">Редактировать</a>
-    <form action="{% url 'blog:post_delete' pk=post.id %}" method="post" style="display:inline">
+    <form method="post">
         {% csrf_token %}
-        <button type="submit" class="btn btn-danger">Удалить</button>
+        <button type="submit">Удалить</button>
         <a href="{% url 'blog:post_list' %}">
             <button type="button">Отменить</button>
         </a>

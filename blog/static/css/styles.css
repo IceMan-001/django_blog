@@ -2,3 +2,7 @@ body {
     height: 20%;
     background : linear-gradient(to right, blue, pink);
 }
+.wrapper {
+    display: flex;
+}
+
