@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import (index, about, send_data, add_post, post_list, post_list_in_table, contacts, post_detail, post_edit,
-                    post_delete)
+from .views import (index, about, send_data, add_post, post_list, post_list_in_table, contacts,
+                    post_detail, post_edit, post_delete)
 
 app_name = 'blog'
 urlpatterns = [

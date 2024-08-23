@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, JsonResponse
+from django.views.generic import ListView
 
 from .forms import PostForm
 from .models import Post
@@ -12,11 +13,21 @@ CBV - Class bases views
 
 
 def root(request):
-    return render(request, template_name='blog/index.html')
+    posts = Post.objects.all()
+    context = {
+        'title': 'Посты',
+        'posts': posts
+    }
+    return render(request, template_name='blog/index_new.html', context=context)
 
 
 def index(request):
-    return render(request, template_name='blog/index.html')
+    posts = Post.objects.all()
+    context = {
+        'title': 'Посты',
+        'posts': posts
+    }
+    return render(request, template_name='blog/index_new.html', context=context)
 
 
 def about(request):
@@ -121,7 +132,6 @@ def post_delete(request, pk):
     post = get_object_or_404(Post, pk=pk)  # получить объект по ключу
     if request.method == 'POST':
         post.delete()
-        # messages.success(request, 'The post has been deleted successfully.')
         return redirect('blog:post_list')
     return render(request, template_name="blog/post_delete.html", context={'post': post})
 

@@ -1,8 +1,6 @@
 body {
     height: 20%;
-    background : linear-gradient(to right, blue, pink);
+    background : linear-gradient(to right, #00ff95, #c0fff8);
 }
-.wrapper {
-    display: flex;
-}
+
 
