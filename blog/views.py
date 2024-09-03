@@ -18,7 +18,7 @@ def root(request):
         'title': 'Посты',
         'posts': posts
     }
-    return render(request, template_name='blog/index_new.html', context=context)
+    return render(request, template_name='blog/index.html', context=context)
 
 
 def index(request):
@@ -27,7 +27,7 @@ def index(request):
         'title': 'Посты',
         'posts': posts
     }
-    return render(request, template_name='blog/index_new.html', context=context)
+    return render(request, template_name='blog/index.html', context=context)
 
 
 def about(request):

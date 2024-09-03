@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-1jov6dpqbvehpjjzz+&pv094jr0!sqsakkmjn68kd&r6^q=&a@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -124,3 +124,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = "users.CustomUser"
+
+LOGIN_REDIRECT_URL = 'blog:post_list'
+LOGIN_URL = 'users:login'
