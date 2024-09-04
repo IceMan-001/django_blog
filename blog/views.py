@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, JsonResponse
 from django.views.generic import ListView
-
+from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 
 from .forms import PostForm
@@ -84,10 +84,17 @@ def add_post(request):
 
 def post_list(request):
     # Получаем все объекты модели Post
-    posts = Post.objects.all()
+    # сортируем по убыванию
+    posts = Post.objects.all().order_by('-created_at')
+    # показываем по 3 поста на странице
+    # получаем номер страницы из url
+    paginator = Paginator(posts, 3)
+    page_number = request.GET.get('page')
+    # получаем объекты для текущей страницы
+    page_obj = paginator.get_page(page_number)
     context = {
         'title': 'Посты',
-        'posts': posts
+        'page_obj': page_obj
     }
     return render(request, template_name='blog/posts.html', context=context)
 
