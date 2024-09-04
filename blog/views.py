@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, JsonResponse
 from django.views.generic import ListView
 
+from django.contrib.auth.decorators import login_required
+
 from .forms import PostForm
 from .models import Post
 
@@ -54,9 +56,10 @@ def send_data(request):
     return JsonResponse(data=data)
 
 
+@login_required
 def add_post(request):
     if request.method == 'GET':
-        form = PostForm()
+        form = PostForm(author=request.user)
         context = {
             'form': form,
             'title': 'Добавление поста'
@@ -64,7 +67,7 @@ def add_post(request):
         return render(request, template_name='blog/add_post.html', context=context)
 
     if request.method == 'POST':
-        form = PostForm(request.POST, request.FILES)
+        form = PostForm(request.POST, request.FILES, author=request.user)
         if form.is_valid():
             # instance = form.save(commit=False)  # объект модели (можно изменить перед записью в таблицу)
             # instance.title = 'Миша'
@@ -99,9 +102,9 @@ def post_list_in_table(request):  # Посты в виде таблицы
     return render(request, template_name='blog/posts_in_table.html', context=context)
 
 
-def post_detail(request, pk):
+def post_detail(request, slug):
     # получаем объект с заданным первичным ключом
-    post = get_object_or_404(Post, pk=pk)
+    post = get_object_or_404(Post, slug=slug)
     # post = Post.objects.get(pk=pk)
     context = {
         'title': 'Информация о посте',
@@ -111,6 +114,7 @@ def post_detail(request, pk):
     return render(request, template_name='blog/post_detail.html', context=context)
 
 
+@login_required
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)  # получить объект по ключу
     if request.method == 'POST':
@@ -128,6 +132,7 @@ def post_edit(request, pk):
     return render(request, template_name='blog/post_edit.html', context=context)
 
 
+@login_required
 def post_delete(request, pk):
     post = get_object_or_404(Post, pk=pk)  # получить объект по ключу
     if request.method == 'POST':
@@ -138,6 +143,10 @@ def post_delete(request, pk):
 
 def page_not_found(request, exception):
     return render(request, 'blog/404.html', status=404)
+
+
+def forbidden(request, exception):
+    return render(request, 'blog/403.html', status=403)
 
 
 def server_error(request):
