@@ -149,12 +149,12 @@ def post_delete(request, pk):
 
 
 def page_not_found(request, exception):
-    return render(request, 'blog/404.html', status=404)
+    return render(request, template_name='blog/404.html', status=404)
 
 
 def forbidden(request, exception):
-    return render(request, 'blog/403.html', status=403)
+    return render(request, template_name='blog/403.html', status=403)
 
 
 def server_error(request):
-    return render(request, 'blog/500.html', status=500)
+    return render(request, template_name='blog/500.html', status=500)

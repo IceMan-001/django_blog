@@ -5,7 +5,9 @@
 <h2>Пожалуйста, войдите на сайт</h2>
 <form method="post">
   {% csrf_token %}
+  {% for f in form %}
   {{ form.as_p }}
+
 
   <button type="submit">Войти</button>
 </form>
