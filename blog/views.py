@@ -3,6 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from django.views.generic import ListView
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 from .forms import PostForm
 from .models import Post
@@ -146,6 +147,17 @@ def post_delete(request, pk):
         post.delete()
         return redirect('blog:post_list')
     return render(request, template_name="blog/post_delete.html", context={'post': post})
+
+
+def product_search(request):
+    query = request.GET.get('query')
+    query_text = Q(title__contains=query) & Q(title__icontains=query)
+
+    page_obj = Post.objects.filter(query_text)
+
+    context = { 'page_obj': page_obj}
+
+    return render(request, template_name="blog/posts.html", context=context)
 
 
 def page_not_found(request, exception):
